@@ -1,13 +1,8 @@
-import { Configuration as WebpackConfiguration, HotModuleReplacementPlugin } from 'webpack';
-import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path = require('path');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
 
-interface Configuration extends WebpackConfiguration {
-  devServer?: WebpackDevServerConfiguration;
-}
-
-const config: Configuration = {
+module.exports = {
   mode: 'development',
   output: {
     filename: 'bundle.js',
@@ -45,5 +40,3 @@ const config: Configuration = {
     new HotModuleReplacementPlugin()
   ]
 };
-
-export default config;

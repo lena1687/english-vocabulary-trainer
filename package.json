@@ -4,8 +4,8 @@
   "description": "The simulator for training and memorizing English words",
   "main": "src/index.ts",
   "scripts": {
-    "start": "webpack serve --config webpack.dev.config.ts",
-    "build": "webpack --config webpack.dev.config.ts"
+    "start": "webpack serve --config webpack.config.js",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
