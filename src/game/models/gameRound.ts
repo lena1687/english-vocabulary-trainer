@@ -13,7 +13,9 @@ export class GameRound {
     this.errors = errors;
   }
 
-  get getProgress(): number {
+  // getters
+
+  get progress(): number {
     return this.word.length - this.letters.length;
   }
 
@@ -29,11 +31,13 @@ export class GameRound {
     return this.isFailed || this.isSuccessful;
   }
 
+  // methods
+
   select(index: number): boolean {
     if (this.isFinished) {
       throw new Error('Round is finished!');
     }
-    if (this.word[this.getProgress] === this.letters[index]) {
+    if (this.word[this.progress] === this.letters[index]) {
       this.letters.splice(index, 1);
       return true;
     } else {

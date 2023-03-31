@@ -1,6 +1,6 @@
 import { wordList } from '../constants';
 import { GameTraining } from './gameTraining';
-import { IGameRound } from './types';
+import { IGameResults, IGameRound } from './types';
 import { shuffle } from '../utils';
 
 export * from './gameRound';
@@ -22,4 +22,21 @@ export function generateTraining(roundsNumber: number, attempts: number): GameTr
     }));
 
   return new GameTraining({ rounds, currentRoundNumber: 0, isFinishedTraining: false });
+}
+
+export function gameTrainingResult(training: GameTraining): IGameResults {
+  return training.rounds.reduce(
+    (results, round) => {
+      if (round.errors) {
+        results.errorsNumber += round.errors;
+        if (results.hardestWord.errors < round.errors) {
+          results.hardestWord = round;
+        }
+      } else if (round.isSuccessful) {
+        results.correctWordsNumber++;
+      }
+      return results;
+    },
+    { correctWordsNumber: 0, errorsNumber: 0, hardestWord: training.rounds[0] }
+  );
 }

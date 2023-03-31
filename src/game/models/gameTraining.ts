@@ -12,15 +12,18 @@ export class GameTraining {
     this.isFinishedTraining = finished;
   }
 
+  // getters
+
   get getCurrentRoundNumber(): IGameRound {
     return this.rounds[this.currentRoundNumber];
   }
+
+  // methods
 
   nextTraining(): void {
     if (this.rounds.length === this.currentRoundNumber + 1) {
       this.isFinishedTraining = true;
       return;
-
     } else {
       this.currentRoundNumber++;
     }
