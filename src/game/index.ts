@@ -31,10 +31,8 @@ export function gameTrainingResult(training: GameTraining): IGameResults {
         results.errorsNumber += round.errors;
         if (results.hardestWord.errors < round.errors) {
           results.hardestWord = round;
-        } else if (!round.isFailed) {
-          results.correctWordsNumber++;
         }
-      } else {
+      } else if (round.isFinished) {
         results.correctWordsNumber++;
       }
       return results;

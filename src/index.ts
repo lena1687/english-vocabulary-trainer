@@ -63,7 +63,7 @@ document.addEventListener('keydown', event => {
     event.ctrlKey ||
     event.shiftKey ||
     event.metaKey ||
-    !event.key.match(/[A-Za-z]/)
+    !event.key.match(/^[A-Za-z]$/)
   ) {
     return;
   }
