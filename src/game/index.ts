@@ -21,7 +21,7 @@ export function generateTraining(roundsNumber: number, attempts: number): GameTr
       errors: 0
     }));
 
-  return new GameTraining({ rounds, currentRoundNumber: 0, isFinishedTraining: false });
+  return new GameTraining({ rounds, currentRoundNumber: 0, isFinished: false });
 }
 
 export function gameTrainingResult(training: GameTraining): IGameResults {
@@ -31,8 +31,10 @@ export function gameTrainingResult(training: GameTraining): IGameResults {
         results.errorsNumber += round.errors;
         if (results.hardestWord.errors < round.errors) {
           results.hardestWord = round;
+        } else if (!round.isFailed) {
+          results.correctWordsNumber++;
         }
-      } else if (round.isSuccessful) {
+      } else {
         results.correctWordsNumber++;
       }
       return results;

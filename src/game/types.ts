@@ -10,7 +10,7 @@ export interface IGameRound {
 export interface IGameTraining {
   rounds: IGameRound[];
   currentRoundNumber: number;
-  isFinishedTraining: boolean;
+  isFinished: boolean;
 }
 
 export interface IGameResults {

@@ -19,16 +19,12 @@ export class GameRound {
     return this.word.length - this.letters.length;
   }
 
-  get isSuccessful(): boolean {
-    return this.letters.length === 0;
-  }
-
   get isFailed(): boolean {
     return this.errors === this.attempts;
   }
 
   get isFinished(): boolean {
-    return this.isFailed || this.isSuccessful;
+    return this.isFailed || this.letters.length === 0;
   }
 
   // methods

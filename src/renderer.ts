@@ -1,4 +1,4 @@
-import { GameRound, GameTraining, IGameResults } from './models';
+import { GameRound, GameTraining, IGameResults } from './game';
 
 export class Renderer {
   trainingNumber: HTMLElement;
@@ -19,7 +19,7 @@ export class Renderer {
   }
 
   renderTraining(training: GameTraining, onSelect: (index: number) => boolean): void {
-    if (training.isFinishedTraining) {
+    if (training.isFinished) {
       this.roundWrap.classList.add('d-none');
       this.lettersButtons = [];
       return;
@@ -33,7 +33,7 @@ export class Renderer {
   }
 
   renderResults(results: IGameResults, training: GameTraining): void {
-    if (training.isFinishedTraining) {
+    if (training.isFinished) {
       this.resultsWrap.innerHTML = `<p>Words number without errors: ${results.correctWordsNumber}</p>
                                     <p>Errors number: ${results.errorsNumber}</p>
                                     <p>Word with the most errors: ${results.hardestWord.word}</p>`;

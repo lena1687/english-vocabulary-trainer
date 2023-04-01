@@ -4,12 +4,12 @@ import { IGameRound, IGameTraining } from './types';
 export class GameTraining {
   readonly rounds: GameRound[];
   currentRoundNumber: number;
-  isFinishedTraining: boolean;
+  isFinished: boolean;
 
-  constructor({ rounds, currentRoundNumber, isFinishedTraining }: IGameTraining) {
+  constructor({ rounds, currentRoundNumber, isFinished }: IGameTraining) {
     this.rounds = rounds.map((item: IGameRound) => new GameRound(item));
     this.currentRoundNumber = currentRoundNumber;
-    this.isFinishedTraining = isFinishedTraining;
+    this.isFinished = isFinished;
   }
 
   // getters
@@ -22,7 +22,7 @@ export class GameTraining {
 
   nextTraining(): void {
     if (this.rounds.length === this.currentRoundNumber + 1) {
-      this.isFinishedTraining = true;
+      this.isFinished = true;
       return;
     } else {
       this.currentRoundNumber++;
