@@ -11,3 +11,7 @@ export const wordList: string[] = [
   'button',
   'software'
 ];
+
+export const roundsNumber: number = 6;
+
+export const attemptsPerRoundNumber: number = 3;

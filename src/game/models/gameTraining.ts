@@ -6,15 +6,15 @@ export class GameTraining {
   currentRoundNumber: number;
   isFinishedTraining: boolean;
 
-  constructor({ rounds, currentNumber, finished }: IGameTraining) {
+  constructor({ rounds, currentRoundNumber, isFinishedTraining }: IGameTraining) {
     this.rounds = rounds.map((item: IGameRound) => new GameRound(item));
-    this.currentRoundNumber = currentNumber;
-    this.isFinishedTraining = finished;
+    this.currentRoundNumber = currentRoundNumber;
+    this.isFinishedTraining = isFinishedTraining;
   }
 
   // getters
 
-  get getCurrentRoundNumber(): IGameRound {
+  get currentRound(): GameRound {
     return this.rounds[this.currentRoundNumber];
   }
 
