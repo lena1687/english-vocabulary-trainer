@@ -2,17 +2,10 @@
 
 The simulator for training and memorizing English words.
 
-##Technologies
-
-- TypeScript 5
-- Webpack 5
-
-By using ES6 syntax.
-
-##Scripts
+## Scripts
 
 - Installing packages `$ npm i`
-- Start project `$ npm start`
-- Build project `$ npm run build`
-- Linter `$ npm run prettier`
-- Tests `$ npm test`
+- Run project with *Webpack-dev-server* for development `$ npm start`
+- Build project with *Webpack* for production use`$ npm run build`
+- Lint code with *Prettier* `$ npm run prettier`
+- Tests with *Jest* `$ npm test`
