@@ -1,19 +1,18 @@
 import { Renderer } from './renderer';
-import { gameTrainingResult, generateTraining } from './game';
+import { GameTraining, gameTrainingResult, generateTraining } from './game';
 import { attemptsPerRoundNumber, roundsNumber } from './constants';
 import { load, save } from './storage';
 
 //application state
 const state = {
-  trainings: load(),
-  trainingIndex: 0,
+  training: load(),
   renderer: new Renderer(document.getElementById('container') as HTMLElement)
 };
 
 function onSelect(buttonIndex: number): boolean {
-  const training = state.trainings[state.trainingIndex];
+  const training = state.training as GameTraining;
   const result = training.currentRound.select(buttonIndex);
-  save(state.trainings);
+  save(training);
   //For better user experience: user can see a clicked button for 200ms
   setTimeout(() => {
     render();
@@ -22,8 +21,7 @@ function onSelect(buttonIndex: number): boolean {
 }
 
 function render() {
-  const training = state.trainings[state.trainingIndex];
-  state.renderer.renderTitle(state.trainings.length - state.trainingIndex);
+  const training = state.training as GameTraining;
   state.renderer.renderTraining(training, onSelect);
   state.renderer.renderResults(gameTrainingResult(training), training);
   //User can see the result for 1 sec, for better user experience
@@ -31,32 +29,35 @@ function render() {
   if (round.isFinished && !training.isFinished) {
     setTimeout(() => {
       training.nextTraining();
-      save(state.trainings);
+      save(training);
       render();
     }, 1000);
   }
 }
 
 export function initApp() {
-  if (state.trainings.length && !state.trainings[0].isFinished) {
-    const result = confirm('Do you want to continue the training?');
-    if (result) {
-      return render();
-    } else {
-      state.trainings[0].isFinished = true;
-    }
+  if (state.training && !state.training.isFinished) {
+    state.renderer.askForContinueTraining(result => {
+      if (result) {
+        return render();
+      }
+      state.training = generateTraining(roundsNumber, attemptsPerRoundNumber);
+      save(state.training);
+      render();
+    });
+  } else {
+    state.training = generateTraining(roundsNumber, attemptsPerRoundNumber);
+    save(state.training);
+    render();
   }
-  const training = generateTraining(roundsNumber, attemptsPerRoundNumber);
-  state.trainings.unshift(training);
-  save(state.trainings);
-  return render();
 }
 
 //listeners
 
 document.addEventListener('keydown', event => {
-  const training = state.trainings[state.trainingIndex];
+  const training = state.training;
   if (
+    !training ||
     training.currentRound.isFinished ||
     training.isFinished ||
     event.altKey ||

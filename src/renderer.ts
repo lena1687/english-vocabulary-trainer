@@ -1,7 +1,6 @@
 import { GameRound, GameTraining, IGameResults } from './game';
 
 export class Renderer {
-  trainingNumber: HTMLElement;
   roundWrap: HTMLElement;
   currentQuestionWrap: HTMLElement;
   totalQuestionWrap: HTMLElement;
@@ -14,8 +13,9 @@ export class Renderer {
     this.initStructure();
   }
 
-  renderTitle(trainingIndex: number) {
-    this.trainingNumber.innerText = `#${trainingIndex}`;
+  askForContinueTraining(onAnswer: (result: boolean) => void): void {
+    const result = confirm('Do you want to continue the training?');
+    onAnswer(result);
   }
 
   renderTraining(training: GameTraining, onSelect: (index: number) => boolean): void {
@@ -110,9 +110,6 @@ export class Renderer {
     mainTitle.classList.add('mb-3');
     mainTitle.innerText = 'English Vocabulary Trainer ';
     this.container.appendChild(mainTitle);
-    this.trainingNumber = document.createElement('span');
-    this.trainingNumber.classList.add('badge', 'badge-secondary');
-    mainTitle.appendChild(this.trainingNumber);
     //description
     const description = document.createElement('p');
     description.classList.add('lead', 'mb-1');

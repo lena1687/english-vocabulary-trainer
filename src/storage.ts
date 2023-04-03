@@ -1,10 +1,10 @@
 import { GameTraining, IGameTraining } from './game';
 
-export function save(trainings: GameTraining[]): void {
-  localStorage.setItem('vocabularyTrainer', JSON.stringify(trainings));
+export function save(training: GameTraining): void {
+  localStorage.setItem('vocabularyTrainer', JSON.stringify(training));
 }
 
-export function load(): GameTraining[] {
-  const trainings: IGameTraining[] = JSON.parse(localStorage.getItem('vocabularyTrainer') ?? '[]');
-  return trainings.map(training => new GameTraining(training));
+export function load(): GameTraining | null {
+  const training: IGameTraining | null = JSON.parse(localStorage.getItem('vocabularyTrainer') ?? 'null');
+  return training ? new GameTraining(training ) : null;
 }
