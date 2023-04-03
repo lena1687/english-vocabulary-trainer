@@ -20,7 +20,7 @@ export class GameTraining {
 
   // methods
 
-  nextTraining(): void {
+  next(): void {
     if (this.rounds.length === this.currentRoundNumber + 1) {
       this.isFinished = true;
       return;

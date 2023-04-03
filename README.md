@@ -14,4 +14,5 @@ By using ES6 syntax.
 - Installing packages `$ npm i`
 - Start project `$ npm start`
 - Build project `$ npm run build`
-- Prettier `$ npm run prettier`
+- Linter `$ npm run prettier`
+- Tests `$ npm test`

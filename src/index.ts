@@ -28,7 +28,7 @@ function render() {
   const round = training.currentRound;
   if (round.isFinished && !training.isFinished) {
     setTimeout(() => {
-      training.nextTraining();
+      training.next();
       save(training);
       render();
     }, 1000);
